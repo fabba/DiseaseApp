@@ -1,0 +1,37 @@
+<div data-role="panel" id="mypanel" data-position-fixed="true" data-display="overlay">
+	
+	<% if (@user.nil?) %>
+	  <a class="menuButton" data-role="button" href="/users/registermenu" >Register</a>
+    <a class="menuButton" data-role="button" href="/users/logmenu" >Log in</a>
+  <% else %>
+    <ul data-role="listview"  data-inset="true">
+      <li> Logged in as: <%= @user.name %> </li>
+    </ul>
+    <a data-role="button" target="_top"
+      <%= link_to("View profile", user_path(id: @user.id)) %> 
+    </a>
+    <a class="menuButton" data-role="button" href="/users/logout" >Log out</a>
+  <% end %>
+  
+  <ul data-role="listview"  data-inset="true">
+	  <li><%= render :partial => 'users/searchbar' %></li>
+	  
+	  <li>
+      <input name="" id="searchCountry" placeholder="Search For Country" value=""
+        type="search" onkeydown="if (event.keyCode == 13) zoom(document.getElementById('searchCountry').value)" >
+      </input>
+    </li>
+	</ul>
+	  
+  <% if !@user.nil? %>
+    <a data-role="button" 
+      <%= link_to("Messages", user_messages_path(user_id: @user.id)) %> 
+    </a>
+  <% end %>
+  
+  <a data-role="button" target="_top"
+    <%= link_to("Wishes and Visits", users_showCountries_path) %> 
+  </a>
+
+  <a data-role="button" href="#my-header" data-rel="close">Close panel</a>
+</div>

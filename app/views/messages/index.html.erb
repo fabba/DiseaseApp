@@ -1,0 +1,60 @@
+<!-- Style for pagination, source: https://github.com/mislav/will_paginate -->
+<%= stylesheet_link_tag    "digg_pagination", media: "all", "data-turbolinks-track" => true %>
+
+<h3> Received Messages for <%= @user.name %>. </h3>
+
+<table data-role="table" id="table1" data-mode="columntoggle" class="ui-responsive table-stroke">
+  <thead>
+  	<tr>
+    	<th data-priority="2">Sender</th>
+      <th>Title</th>
+      <th data-priority="3">Date</th>
+      <th data-priority="4">Viewed</th>
+    </tr>
+  </thead>
+  
+  <tbody class="recentView">
+  	<% @received_messages.each do |message| %>
+      <tr>
+        <td> <%= message.sender.name %> </td>
+        <td> <%= link_to(message.title, user_message_path(user_id: @user.id, id: message.id)) %> </td>
+        <td> <%= message.created_at %> </td>
+        <td> <%= message.viewed ? "Seen" : "New" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- paginate @received_messages -->
+<div id="coursesPagination" class="digg_pagination">
+  <%= will_paginate @received_messages, :param_name => 'recPage', :container => false %>
+</div>
+
+<h3> Send Messages by <%= @user.name %>. </h3>
+
+<table data-role="table" id="table1" data-mode="columntoggle" class="ui-responsive table-stroke">
+  <thead>
+  	<tr>
+    	<th data-priority="2">Receiver</th>
+      <th>Title</th>
+      <th data-priority="3">Date</th>
+      <th data-priority="4">Viewed</th>
+    </tr>
+  </thead>
+  
+  <tbody class="recentView">
+  	<% @send_messages.each do |message| %>
+      <tr>
+        <td> <%= message.receiver.name %> </td>
+        <td> <%= link_to(message.title, user_message_path(user_id: @user.id, id: message.id)) %> </td>
+        <td> <%= message.created_at %> </td>
+        <td> <%= message.viewed ? "Seen" : "New" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- paginate @send_messages -->
+<div id="coursesPagination" class="digg_pagination">
+  <%= will_paginate @send_messages, :param_name => 'sendPage', :container => false %>
+</div>

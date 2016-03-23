@@ -1,0 +1,12 @@
+<div class= "Sign_Form">
+  <h1>Log in</h1>
+  <% if flash[:notice] %>
+    <div class="notice" style="color:red"><%= flash[:notice] %></div>
+    <%  flash[:notice] = "" %>
+  <% end %>
+  <%= form_tag(:controller => 'users', :action => 'login') do %>
+    <p>Username:</br> <%= text_field_tag :username %></p> 
+    <p>Password:</br> <%= password_field_tag :password %></p> 
+    <%= submit_tag("Log In", :target =>"_top") %>
+  <% end %>
+</div>

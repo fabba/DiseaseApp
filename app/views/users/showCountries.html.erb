@@ -1,0 +1,58 @@
+<script src="/assets/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="/assets/jquery-mousewheel.js"></script>
+
+<script src="/assets/lib/jvectormap.js?body=1"></script>
+<script src="/assets/lib/abstract-element.js?body=1"></script>
+<script src="/assets/lib/abstract-canvas-element.js?body=1"></script>
+<script src="/assets/lib/abstract-shape-element.js?body=1"></script>
+
+<script src="/assets/lib/svg-element.js?body=1"></script>
+<script src="/assets/lib/svg-group-element.js?body=1"></script>
+<script src="/assets/lib/svg-canvas-element.js?body=1"></script>
+<script src="/assets/lib/svg-shape-element.js?body=1"></script>
+<script src="/assets/lib/svg-path-element.js?body=1"></script>
+<script src="/assets/lib/svg-circle-element.js?body=1"></script>
+
+<script src="/assets/lib/vml-element.js?body=1"></script>
+<script src="/assets/lib/vml-group-element.js?body=1"></script>
+<script src="/assets/lib/vml-canvas-element.js?body=1"></script>
+<script src="/assets/lib/vml-shape-element.js?body=1"></script>
+<script src="/assets/lib/vml-path-element.js?body=1"></script>
+<script src="/assets/lib/vml-circle-element.js?body=1"></script>
+
+<script src="/assets/lib/vector-canvas.js"></script>
+<script src="/assets/lib/simple-scale.js"></script>
+<script src="/assets/lib/numeric-scale.js?body=1"></script>
+<script src="/assets/lib/ordinal-scale.js?body=1"></script>
+<script src="/assets/lib/color-scale.js?body=1"></script>
+<script src="/assets/lib/data-series.js?body=1"></script>
+<script src="/assets/lib/proj.js?body=1"></script>
+<script src="/assets/lib/world-map.js?body=1"></script>
+<script src="/assets/jquery-jvectormap-world-mill-en.js?body=1"></script>
+
+<div id="map1" class="map1">
+  
+</div>
+<div style="left:5%;position:absolute;background-color:#66C2A5;">
+    Visited
+</div>
+<div style="left:5%;top:10%;position:absolute;background-color:#FFA500;">
+    Wish
+</div>
+<script>
+
+  var series = {
+        regions: [{
+          values: {
+          <% @countriesVisited.each do |visit| %>
+          <%= visit.code%>: "#66C2A5",
+          <% end %>
+          <% @countriesWish.each do |wish| %>
+          <%= wish.code%>: "#FFA500",
+          <% end %>},
+          attribute: 'fill' 
+        }]
+      };
+      
+</script>
+

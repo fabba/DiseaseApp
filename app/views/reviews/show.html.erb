@@ -1,0 +1,58 @@
+<div data-content-theme="d">
+
+  <% if flash[:notice] %>
+    <div class="notice" style="color:red"><%= flash[:notice] %></div>
+    <%  flash[:notice] = "" %>
+  <% end %>
+  
+  <ul data-role="listview"  data-inset="true">
+    <li> Written by: <%= @author.name %>, Likes: <%= @review.review_logs.sum("rating") %> </li>
+  </ul>
+  
+  <ul data-role="listview"  data-inset="true">  
+    
+    <li><a target="_top" <%= link_to @review.country.name, country_path(id: @review.country.id) %> </a></li>
+    
+    <li> <%= @review.title %> </li>
+   
+    <li> <%= simple_format(@review.body) %> </li>
+    <% if @author == @user %>
+    
+      <li> <%= link_to 'Edit Review', edit_country_review_path(id: @review.id) %> </li>
+      
+      <li> <%= link_to 'Destroy', country_review_path(id: @review.id),
+           method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+           
+    <% elsif !@user.nil? %>
+    
+      <li class="ui-body ui-body-b">
+			  <fieldset class="ui-grid-a" >
+		     	<div class="ui-block-a"> 
+		     	  <%= button_to 'Like', like_review_path(country_id: @country.id, id: @review.id, like: 1), method: :post %>
+		     	</div>
+		    	<div class="ui-block-b">  
+		    	  <%= button_to 'Dislike', like_review_path(country_id: @country.id, id: @review.id, like: -1), method: :post %>
+		    	</div>
+			  </fieldset>
+		  </li>
+		  
+    <% end %>
+  </ul>
+  
+  <%= render @review.comments %>
+  
+  <% if !@user.nil? %>
+    <% if (@user.comments | @review.comments).empty? %>
+      <% if flash[:commentNotice] %>
+        <div class="notice" style="color:red"><%= flash[:commentNotice] %></div>
+        <%  flash[:commentNotice] = "" %>
+      <% end %>
+      <%= render "comments/form" %>
+    <% else %>
+      You have already posted a comment on this review. Please edit your comment instead of posting a new one.
+    <% end %>
+    
+  <% else %>
+    Please login to post a comment.
+  <% end %>
+</div>

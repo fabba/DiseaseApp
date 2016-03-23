@@ -1,0 +1,26 @@
+<%= form_for [@receiver, @message] do |f| %>
+ <% if @message.errors.any? %>
+    <div id="errorExplanation">
+      <h2>
+        <%= pluralize(@message.errors.count, "error") %> prohibited this message from being send:
+      </h2>
+      <ul>
+      <% @message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.text_field :title, placeholder: "Title"%>
+  </p>
+ 
+  <p>
+    <%= f.text_area :body, placeholder: "Body" %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

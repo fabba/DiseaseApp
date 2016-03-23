@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DiseaseApp</title>
+  
+  <script src="/assets/jquery-1.9.1.min.js"></script>
+  
+  <script src="/assets/jquery.mobile-1.3.1.min.js"></script>
+
+   <script src="/assets/application.js?body=1"></script>
+
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css">
+     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tag %>  
+
+</head>
+
+<body>
+
+  <div data-role="page" data-url="<%= request.original_url%>">
+
+    <!-- render header -->
+    <%= render :partial => 'layouts/upperDefault' %>
+
+	    <div id="content" data-role="content">
+      
+	    <%= yield%>
+	    </div> <!-- /content -->
+
+    <!-- render footer -->
+    <%= render :partial => 'layouts/lowerDefault' %>
+  </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  reviewId: 1
+  userId: 1
+  seen: false
+  rating: 
+
+two:
+  reviewId: 1
+  userId: 1
+  seen: false
+  rating: 

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  userID: 1
+  countryId: 1
+  visited: false
+  wish: false
+  viewed: false
+
+two:
+  userID: 1
+  countryId: 1
+  visited: false
+  wish: false
+  viewed: false

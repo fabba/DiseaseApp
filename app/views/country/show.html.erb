@@ -1,0 +1,88 @@
+<% if !@user.nil? %>
+  <fieldset class="ui-grid-e" style="float:right">
+	  <div  data-role="button" class="ui-block-a" onClick="visitCountry(<%= @country.id %>)"> 
+      visit country
+    </div>
+    
+    <div  data-role="button" class="ui-block-b" onClick="wishCountry(<%= @country.id %>)"> 
+    	wish country
+	  </div>
+	  
+	  <div class="ui-block-c">
+	    <a data-role="button"
+        <%= link_to "Show all reviews", country_reviews_path(country_id: @country.id) %>
+      </a>
+    </div>
+    
+    <div class="ui-block-d">
+      <a data-role="button" data-inline="true" data-icon="edit"  data-iconpos="right"
+        <% if !@user.reviews.where("country_id is ?", @country.id).take.nil? %>  
+          class="ui-disabled"
+        <% end %>
+        <%= link_to 'Write Review', new_country_review_path(country_id: @country.id) %>
+      </a>
+    </div>
+  </fieldset>
+<% end %>
+<a href="http://en.wikipedia.org/wiki/<%= @country.name %>" >url to wikipedia</a>
+<h1><%= @country.name %></h1>
+
+
+ 
+  <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+  <script src="https://www.amcharts.com/lib/3/pie.js"></script>
+<div id="disease" style="float:left;width: 50%; height: 400px;">
+<h3>
+   Ten most prevalent diseases
+</h3>
+
+
+
+  <script type="text/javascript">
+    var chart = AmCharts.makeChart( "chartdiv4", {
+  	"type": "pie",
+  	"dataProvider": [ 
+<% @relevantDisease.each do |key,value| %>
+{
+   	"disease": "<%= key.to_s.chomp('"').reverse.chomp('"').reverse %> ",
+    "tweets": <%= value %>  }, 
+<% end %>],
+  "valueField": "tweets",
+  "titleField": "disease"
+} );
+
+  </script>
+
+  <div id="chartdiv4" style="height: 300px;"></div>
+
+</div>
+<div id="user" style="float:right;width: 50%; height: 400px;">
+<h3>
+   Ten most active users
+</h3>
+  <script type="text/javascript">
+    var chart1 = AmCharts.makeChart( "chartdiv5", {
+  	"type": "pie",
+  	"dataProvider": [ 
+<% @relevantUser.each do |key,value| %>
+{
+   	"user": "<%= key.to_s.chomp('"').reverse.chomp('"').reverse%> ",
+    "tweets": <%= value %>  }, 
+<% end %>],
+  "valueField": "tweets",
+  "titleField": "user"
+} );
+  </script>
+ <div id="chartdiv5" style="height: 300px;"></div>
+</div>
+<h3>
+  Raw tweets
+</h3>   
+
+<% @relevantTweets.each do |value| %>
+<p>
+        <%= value[0] %> has been said by <%= value[1] %> in the tweet  <%= value[2] %> 
+    </p>
+      
+  <% end %>
+

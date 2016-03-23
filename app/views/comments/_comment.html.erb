@@ -1,0 +1,15 @@
+<div data-content-theme="d">
+  <ul data-role="listview"  data-inset="true">
+
+    <li> Comment by: <%= comment.user.name %> </li>
+     
+    <li> <%= simple_format(comment.body) %> </li>
+
+    <% if comment.user == @user %>
+      <li> <%= link_to 'Edit Comment', edit_country_review_comment_path(review_id: comment.review.id, id: comment.id) %> </li>
+      <li> <%= link_to 'Destroy', country_review_comment_path(review_id: comment.review.id, id: comment.id),
+           method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+    <% end %>
+
+  </ul>
+</div>

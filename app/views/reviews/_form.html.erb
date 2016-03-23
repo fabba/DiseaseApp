@@ -1,0 +1,26 @@
+<%= form_for [@country, @review] do |f| %>
+  <% if @review.errors.any? %>
+    <div id="errorExplanation">
+      <h2>
+        <%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:
+      </h2>
+      <ul>
+      <% @review.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.text_field :title, placeholder: "Title" %>
+  </p>
+ 
+  <p>
+    <%= f.text_area :body, placeholder: "Body" %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

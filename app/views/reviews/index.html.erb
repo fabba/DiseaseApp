@@ -1,0 +1,22 @@
+<!-- Style for pagination, source: https://github.com/mislav/will_paginate -->
+<%= stylesheet_link_tag "digg_pagination", media: "all", "data-turbolinks-track" => true %>
+
+<h1> All reviews for 
+  <a target="_top" 
+    <%= link_to @country.name, country_path(id: @country.id) %> 
+  </a>
+</h1>
+
+<a data-role="button" data-inline="true" data-icon="edit" data-iconpos="right" 
+  <% if !@user || !@user.reviews.where("country_id is ?", @country.id).take.nil? %>  
+    class="ui-disabled"
+  <% end %>
+  <%= link_to 'Write Review', new_country_review_path(country_id: @country.id) %>
+</a>
+
+<%= render "reviewList" %>
+
+<!-- paginate @reviews -->
+<div id="coursesPagination" class="digg_pagination">
+  <%= will_paginate @reviews, :container => false %>
+</div>

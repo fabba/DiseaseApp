@@ -1,0 +1,37 @@
+<div data-content-theme="d">
+
+  <ul data-role="listview"  data-inset="true">
+    <li>
+      <a data-role="content" target="_top" 
+        <%= link_to "Sender: " + @message.sender.name,
+              user_path(id: @message.sender.id) %>
+      </a>  
+    </li>
+    
+    <li> 
+      <a data-role="content" target="_top"
+        <%= link_to "Receiver: " + @message.receiver.name,
+              user_path(id: @message.receiver.id) %> 
+      </a>
+    </li>
+  </ul>
+  
+  <ul data-role="listview"  data-inset="true">  
+    <li> <%= @message.title %> </li>
+    <li> <%= simple_format(@message.body) %> </li>
+  </ul>
+  
+  <% if !@user.nil? %>
+    <!-- If message send by current user, direct reply to @receiver, @sender otherwise -->
+    <%= form_for [@user == @message.sender ? @message.receiver : @message.sender, @reply] do |f| %>     
+      <ul data-role="listview"  data-inset="true"> 
+        <li> Reply </li>
+        <li> <%= f.text_field :title, placeholder: "Title" %> </li>
+        <li> <%= f.text_area :body, placeholder: "Body" %> </li>
+        <li> <%= f.submit %> </li>
+      </ul>
+    <% end %>
+  <% else %>
+    Please login to post a reply.
+  <% end %>
+</div>

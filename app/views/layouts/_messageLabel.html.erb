@@ -1,0 +1,17 @@
+<div data-role="panel" id="messagePanel" data-position-fixed="true" data-display="overlay" data-position="right">
+
+  <ul data-role="listview"  data-inset="true">
+    <li> Received Messages </li>
+  </ul>
+
+
+  <% if (!@user.nil?) %>
+    <% @receivedMessages.each do |message| %>      
+      <a data-role="button" data-inline="true"
+        <%= link_to message.sender.name + ": " + message.title, user_message_path(user_id: @user.id, id: message.id) %>
+      </a> 
+    <% end %>
+  <% else %>
+    Login to view your received messages.
+  <% end %>	
+</div>
